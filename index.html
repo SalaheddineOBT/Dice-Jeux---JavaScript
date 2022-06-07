@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dice Game</title>
+    <script src="js/js.js"></script>
+    <script src="js/jq.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha512-SfTiTlX6kk+qitfevl/7LibUOeJWlt9rbyDn92a1DqWOw9vWG2MFoays0sgObmWazO5BQPiFucnnEAjpAB+/Sw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/style.css" />
+     
+</head>
+<body>
+
+    <div class="load">
+        <img src="images/dice.gif" />
+        <h2>LOADING</h2>
+     </div>
+     <h1>PLAY WIN</h1>
+    <div class="container">
+        <div id="user1" class="user1 active">
+            <div class="img">
+                <img src="images/001.png">
+            </div>
+            <h2>Joueur 1</h2>
+            <span id="score1"></span>
+        </div>
+        <div class="cube" id="cube">
+            <div class="front">
+                <span class="fas fa-circle"></span>
+            </div>
+            <div class="back">
+                <pre>
+                    <pre class="firs">
+                         <span class="fas fa-circle"></span>     <span class="fas fa-circle"></span>    <span class="fas fa-circle"></span>
+                    </pre>
+                    <pre class="second">
+                        <span class="fas fa-circle"></span>     <span class="fas fa-circle"></span>    <span class="fas fa-circle"></span>
+                   </pre>
+                </pre>
+            </div>
+            <div class="top">
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+            </div>
+            <div class="left">
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+            </div>
+            <div class="right">
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+            </div>
+            <div class="bottom">
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+                <span class="fas fa-circle"></span>
+            </div>
+        </div>
+        <div class="user2 " id="user2">
+            <div class="img">
+                <img src="images/002.png">
+            </div>
+            <h2>Joueur 2</h2>
+            <span id="score2">0</span>
+        </div>
+    </div>
+    <div class="kha">
+
+    </div>
+
+
+    <script>
+
+        var S1=document.getElementById("score1");
+        var S2=document.getElementById("score2");
+        var U1=document.getElementById("user1");
+        var U2=document.getElementById("user2");
+
+
+        let cub=document.getElementById("cube");
+
+		var t1=0,t2=0;
+        var isP=true;
+
+        angleArray=[[0,0,0],[-310,-362,-38],[-400,-320,-2],[135,-217,-88],[-224,-317,5],[-47,-219,-81],[-133,-360,-53]];
+
+        cub.addEventListener('click',function(e){
+
+
+            cub.style.animation="animate .6s linear";
+			const r=Math.floor(Math.random()*6)+1;
+            console.log(r);
+            
+            cub.style.transform='rotateX('+angleArray[r][0]+'deg) rotateY('+angleArray[r][1]+'deg) rotateZ('+angleArray[r][2]+'deg)';
+            cub.style.transition='2s linear';
+
+             cub.addEventListener("animationend",function(e){
+                 cub.style.animation="";
+             });
+
+             if(r != 1){
+                t1+=r;
+                S1.innerHTML=''+t1;
+
+                if(isP==true){
+                    U1.classList.remove("active");
+                    U2.classList.add("active");
+                    isP=false;
+                    
+
+                }
+                else{
+                    U2.classList.remove("active");
+                    isP=true;
+                    U1.classList.add("active");
+                }
+
+             }else{
+                t1=0;
+                S1.innerHTML='0';
+
+                if(isP==false){
+                    isP=true;
+                    U2.classList.remove("active");
+                    U1.classList.add("active");
+                }
+                else{
+                    U1.classList.remove("active");
+                    U2.classList.add("active");
+                    isP=false;
+                }
+             }
+
+
+            
+
+        });
+
+        
+
+
+        function initial(){
+            S1.innerText=0;
+            S2.innerText=0;
+            isP=true;
+            t1=0;
+            t2=0;
+            U1.classList.remove("active");
+            U2.classList.remove("active");
+            U1.classList.add("active");
+
+
+        }
+        initial();
+
+
+
+    </script>
+
+    <script src="js/js.js"></script>
+    <script src="js/jq.js"></script>
+
+</body>
+</html>
